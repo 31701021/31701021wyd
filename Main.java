@@ -52,9 +52,9 @@ public class Main {
 	public static void initnodes(String path) throws IOException {		
 		InputStreamReader reader = new InputStreamReader (new FileInputStream(path),"UTF-8");
         BufferedReader bufferedReader = new BufferedReader(reader);
-        String line =bufferedReader.readLine();//¶ÁÈëÏßÂ·
+        String line =bufferedReader.readLine();//è¯»å…¥çº¿è·¯
         while (line!=null){
-            int num =Integer.parseInt(bufferedReader.readLine());//¶ÁÈëÏßÂ·Õ¾Êı
+            int num =Integer.parseInt(bufferedReader.readLine());//è¯»å…¥çº¿è·¯ç«™æ•°
             String prenode=null;
             String curnode=bufferedReader.readLine();
             for(int i=1;i<=num;i++) {
@@ -76,7 +76,7 @@ public class Main {
         }
         bufferedReader.close();
         reader.close();
-        System.out.println("¶ÁÈ¡³É¹¦");
+        System.out.println("è¯»å–æˆåŠŸ");
 	}
 	
 	public static void init(String id,List<String> nears,String line){
@@ -161,7 +161,7 @@ public class Main {
 				if(line1.equals(line2)) line=line1;
 			}
 		}
-		System.out.println("³Ë×ø"+line);
+		System.out.println("ä¹˜å"+line);
 		for(String f:to.getPassedIDList()){
 			int fg=0;
 			for(String line1:searchNodeById(f).getLine()) {
@@ -173,7 +173,7 @@ public class Main {
 						if(line1.equals(line2)) line=line1;
 				}
 				System.out.println();
-				System.out.println("»»³Ë"+line);
+				System.out.println("æ¢ä¹˜"+line);
 			}
 			if(to.getPassedIDList().indexOf(f)==0)
 				System.out.print(f);
@@ -182,7 +182,7 @@ public class Main {
 			}
 		}	
 		System.out.println();
-		System.out.println("×Ü¹²"+to.getWeight()+"Õ¾");
+		System.out.println("æ€»å…±"+to.getWeight()+"ç«™");
 	}
 	
 	public static void write(String path) throws IOException {
@@ -198,7 +198,7 @@ public class Main {
 				if(line1.equals(line2)) line=line1;
 			}
 		}
-		out.write("³Ë×ø"+line+"\r\n");
+		out.write("ä¹˜å"+line+"\r\n");
 		for(String f:to.getPassedIDList()){
 			int fg=0;
 			for(String line1:searchNodeById(f).getLine()) {
@@ -207,7 +207,7 @@ public class Main {
 			if(fg==0) {
 				line=searchNodeById(f).getLine().get(0);
 				out.write("\r\n");
-				out.write("»»³Ë"+line);
+				out.write("æ¢ä¹˜"+line);
 				out.write("\r\n");
 			}
 			if(to.getPassedIDList().indexOf(f)==0)
@@ -217,8 +217,9 @@ public class Main {
 			}
 		}	
 		out.write("\r\n");
-		out.write("×Ü¹²"+to.getWeight()+"Õ¾");
+		out.write("æ€»å…±"+to.getWeight()+"ç«™");
 		out.close();
+		System.out.println("å†™å…¥æˆåŠŸ");
 	}
 	
 	public static void searchline(String line) {
@@ -230,7 +231,7 @@ public class Main {
 	}
 	
 	public static void run(List<node> V){		
-		passedPath min = new passedPath();//Ê¹ÓÃÎŞ²ÎÊıµÄ		
+		passedPath min = new passedPath();//ä½¿ç”¨æ— å‚æ•°çš„		
 		int flag=0;		
 		for(passedPath c:paths){
 			if(!c.isVisited()){
@@ -241,9 +242,9 @@ public class Main {
 			}		
 		}		
 		if(flag==0) return;		
-		//ÓÃminÈ¥¸üĞÂ¿É´ï½ÚµãµÄpath		
+		//ç”¨minå»æ›´æ–°å¯è¾¾èŠ‚ç‚¹çš„path		
 		for(edge c:min.getCurNode().getEdges()){
-			//¸ù¾İÄ¿±ê½ÚµãÃûÕÒµ½Ä¿±ê½ÚµãµÄpassedPath:to		
+			//æ ¹æ®ç›®æ ‡èŠ‚ç‚¹åæ‰¾åˆ°ç›®æ ‡èŠ‚ç‚¹çš„passedPath:to		
 			node tmp=null;				
 			for(node d:V){
 				if(d.getId().equals(c.getEndNodeId())){
@@ -259,8 +260,8 @@ public class Main {
 			if(to.getWeight()>c.weight+min.getWeight()){
 				List<String> tmpList = new ArrayList<String>(min.getPassedIDList());
 				tmpList.add(to.getCurNode().getId());
-				to.setPassedIDList(tmpList);               //¸üĞÂÂ·¾¶ÁĞ±í					
-				to.setWeight(c.weight+min.getWeight());    //¸üĞÂÀÛ»ıÈ¨Öµ				
+				to.setPassedIDList(tmpList);               //æ›´æ–°è·¯å¾„åˆ—è¡¨					
+				to.setWeight(c.weight+min.getWeight());    //æ›´æ–°ç´¯ç§¯æƒå€¼				
 				}		
 			}		
 		min.setVisited(true);		
